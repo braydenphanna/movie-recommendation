@@ -13,7 +13,7 @@ class Movie:
         self.vote_count=vote_count
 
     def __str__(self):
-        return str(self.title)+" ("+ str(self.id) +")"
+        return str(self.title)
     
     # Creates a Movie object from the corresponding result in recommendations.json
     @classmethod

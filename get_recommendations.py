@@ -1,7 +1,8 @@
 import requests
 import json
+from movie import Movie
 
-def search(): 
+def search(query): 
     # Enter the api key
     api_key=""
 
@@ -9,10 +10,6 @@ def search():
         "accept": "application/json",
         "Authorization": "Bearer "+ api_key
     }
-
-    # Prompt user to enter movie title
-    print("\033[1mSearch: \033[0m", end="")
-    query = input()
 
     # Get corresponding movie ID
     url = "https://api.themoviedb.org/3/search/movie?query="+query+"&include_adult=false&language=en-US&page=1"
@@ -24,3 +21,9 @@ def search():
     recommendations = requests.get(url, headers=headers)
     with open("recommendations.json", "w") as file:
         json.dump(recommendations.json(), file, indent=4)
+
+    movies=[]
+    for n in range(20):
+        movies.append(Movie.from_json(n))
+
+    return movies

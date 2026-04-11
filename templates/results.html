@@ -38,9 +38,8 @@
 
             // Create an array with edges
             var edgesArray = [];
-            edgesArray.push({ from: 1, to: 0 });
-            for (let i = 2; i <= 20; i++) {
-                edgesArray.push({ from: 1, to: i });
+            for (let i = 1; i <= 21; i++) {
+                edgesArray.push({ from: 0, to: i });
             }
             var edges = new vis.DataSet(edgesArray);
 

@@ -14,9 +14,11 @@ python3 ./server.py
 - [x] Create a function to parse each movie entry in the outputted json file into individual movie objects
 - [ ] Create an algorithm to rank the movies using and put them in a weighted graph (based on info such as: genre crossover, director, and lead actors)
 ### User Interface
+- [x] Basic flask setup with working connectivity
 - [ ] Display the recommendation web with labeled edges and movie posters from TMDB (distance of edge denotes similarity?)
-- [ ] Make the web interactable (hover over to see movie details preview?)
+- [ ] Make the web more interactable (hover over to see movie details preview?)
 - [ ] Offer suggested searches while entering your starting movie
+- [ ] Add option to input API key on the website
 
 ## Tech Stack
 ### Frontend
@@ -27,3 +29,8 @@ python3 ./server.py
 ### Backend
 - Python 3
 - [Flask](https://flask.palletsprojects.com/en/stable/) (for Python web integration)
+
+## Other Resources
+- [Flask: file system explained](https://flask.palletsprojects.com/en/stable/tutorial/layout/)
+- [Flask: Python and HTML connectivity explained](https://stackoverflow.com/questions/48552343/how-can-i-execute-a-python-script-from-an-html-button)
+

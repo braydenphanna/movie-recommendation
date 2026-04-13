@@ -1,0 +1,429 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/iXXPaQPfQowpQ5UvhsHLj9BgFhe.jpg",
+            "id": 126889,
+            "title": "Alien: Covenant",
+            "original_title": "Alien: Covenant",
+            "overview": "The crew of the colony ship Covenant, bound for a remote planet on the far side of the galaxy, discovers what they think is an uncharted paradise but is actually a dark, dangerous world.",
+            "poster_path": "/zecMELPbU5YMQpC81Z8ImaaXuf9.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                27,
+                878
+            ],
+            "popularity": 7.599,
+            "release_date": "2017-05-09",
+            "video": false,
+            "vote_average": 6.173,
+            "vote_count": 9335
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/4kix6fAblJIH6eMs0Ku2loyZJXK.jpg",
+            "id": 679,
+            "title": "Aliens",
+            "original_title": "Aliens",
+            "overview": "Ripley, the sole survivor of the Nostromo's deadly encounter with the monstrous Alien, returns to Earth after drifting through space in hypersleep for 57 years. Although her story is initially met with skepticism, she agrees to accompany a team of Colonial Marines back to LV-426.",
+            "poster_path": "/r1x5JGpyqZU8PYhbs4UcrO1Xb6x.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                28,
+                53,
+                878
+            ],
+            "popularity": 12.1348,
+            "release_date": "1986-07-18",
+            "video": false,
+            "vote_average": 7.961,
+            "vote_count": 10722
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/sM42bpH73dmf3kJrE8xr4kztYqR.jpg",
+            "id": 70981,
+            "title": "Prometheus",
+            "original_title": "Prometheus",
+            "overview": "A team of explorers discover a clue to the origins of mankind on Earth, leading them on a journey to the darkest corners of the universe. There, they must fight a terrifying battle to save the future of the human race.",
+            "poster_path": "/qsYQflQhOuhDpQ0W2aOcwqgDAeI.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                9648,
+                27
+            ],
+            "popularity": 9.659,
+            "release_date": "2012-05-30",
+            "video": false,
+            "vote_average": 6.592,
+            "vote_count": 13150
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg",
+            "id": 945961,
+            "title": "Alien: Romulus",
+            "original_title": "Alien: Romulus",
+            "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+            "poster_path": "/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                27,
+                878
+            ],
+            "popularity": 14.9301,
+            "release_date": "2024-08-13",
+            "video": false,
+            "vote_average": 7.168,
+            "vote_count": 4435
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/3aGsZdB5ud6LmU9lppwTLh2fqH1.jpg",
+            "id": 16320,
+            "title": "Serenity",
+            "original_title": "Serenity",
+            "overview": "When the renegade crew of Serenity agrees to hide a fugitive on their ship, they find themselves in an action-packed battle between the relentless military might of a totalitarian regime who will destroy anything \u2013 or anyone \u2013 to get the girl back and the bloodthirsty creatures who roam the uncharted areas of space. But... the greatest danger of all may be on their ship.",
+            "poster_path": "/4sqUOaPFoP2W81mq1UYqZqf5WzA.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                28,
+                12,
+                53
+            ],
+            "popularity": 5.3837,
+            "release_date": "2005-09-25",
+            "video": false,
+            "vote_average": 7.36,
+            "vote_count": 3824
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/2M5V8VcK02o4R5cxe7Ew1ltaxKr.jpg",
+            "id": 19898,
+            "title": "Pandorum",
+            "original_title": "Pandorum",
+            "overview": "Two crew members wake up on an abandoned spacecraft with no idea who they are, how long they've been asleep, or what their mission is. The two soon discover they're actually not alone \u2013 and the reality of their situation is more horrifying than they could have imagined.",
+            "poster_path": "/mNMfa6r3pl0EzFIKEkVcxyr6Rc7.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                28,
+                27,
+                9648,
+                878,
+                53
+            ],
+            "popularity": 3.9116,
+            "release_date": "2009-09-08",
+            "video": false,
+            "vote_average": 6.594,
+            "vote_count": 2617
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/mZGwhwIwYuF0G9XLS8j23dhNfUC.jpg",
+            "id": 2787,
+            "title": "Pitch Black",
+            "original_title": "Pitch Black",
+            "overview": "When their ship crash-lands on a remote planet, the marooned passengers soon learn that escaped convict Riddick isn't the only thing they have to fear. Deadly creatures lurk in the shadows, waiting to attack in the dark, and the planet is rapidly plunging into the utter blackness of a total eclipse. With the body count rising, the doomed survivors are forced to turn to Riddick with his eerie eyes to guide them through the darkness to safety. With time running out, there's only one rule: Stay in the light.",
+            "poster_path": "/3AnlxZ5CZnhKKzjgFyY6EHxmOyl.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                53,
+                878,
+                28
+            ],
+            "popularity": 2.6159,
+            "release_date": "2000-02-18",
+            "video": false,
+            "vote_average": 6.86,
+            "vote_count": 4749
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/lU0zVj8KcQVkPczdGGraYGiRC72.jpg",
+            "id": 8077,
+            "title": "Alien\u00b3",
+            "original_title": "Alien\u00b3",
+            "overview": "After escaping with Newt and Hicks from the alien planet, Ripley crash lands on Fiorina 161, a prison planet and host to a correctional facility. Unfortunately, although Newt and Hicks do not survive the crash, a more unwelcome visitor does. The prison does not allow weapons of any kind, and with aid being a long time away, the prisoners must simply survive in any way they can.",
+            "poster_path": "/xh5wI0UoW7DfS1IyLy3d2CgrCEP.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                28,
+                27
+            ],
+            "popularity": 7.1074,
+            "release_date": "1992-05-22",
+            "video": false,
+            "vote_average": 6.38,
+            "vote_count": 6297
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/7LMy4tZggDRa31ycv5ccnPtLspV.jpg",
+            "id": 9102,
+            "title": "Screamers",
+            "original_title": "Screamers",
+            "overview": "SIRIUS 6B, Year 2078. On a distant mining planet ravaged by a decade of war, scientists have created the perfect weapon: a blade-wielding, self-replicating race of killing devices known as Screamers designed for one purpose only -- to hunt down and destroy all enemy life forms.",
+            "poster_path": "/eqgBf791rMZG7ywHfObpXeMpiRf.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                27,
+                878,
+                10752
+            ],
+            "popularity": 1.5434,
+            "release_date": "1995-09-08",
+            "video": false,
+            "vote_average": 6.221,
+            "vote_count": 593
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/5AIAnucJKZ3sHpm7r1ykFVIoUHK.jpg",
+            "id": 1272,
+            "title": "Sunshine",
+            "original_title": "Sunshine",
+            "overview": "Fifty years into the future, the sun is dying, and Earth is threatened by arctic temperatures. A team of astronauts is sent to revive the Sun \u2014 but the mission fails. Seven years later, a new team is sent to finish the mission as mankind\u2019s last hope.",
+            "poster_path": "/oKGGeJ8qvm0UmClz43VJ31fzPP7.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                53
+            ],
+            "popularity": 5.8196,
+            "release_date": "2007-04-05",
+            "video": false,
+            "vote_average": 7.0,
+            "vote_count": 4206
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/6z9w8eidKWDDXwZNSVNaRolAYEP.jpg",
+            "id": 201,
+            "title": "Star Trek: Nemesis",
+            "original_title": "Star Trek: Nemesis",
+            "overview": "En route to the honeymoon of William Riker to Deanna Troi on her home planet of Betazed, Captain Jean-Luc Picard and the crew of the U.S.S. Enterprise receives word from Starfleet that a coup has resulted in the installation of a new Romulan political leader, Shinzon, who claims to seek peace with the human-backed United Federation of Planets. Once in enemy territory, the captain and his crew make a startling discovery: Shinzon is human, a slave from the Romulan sister planet of Remus, and has a secret, shocking relationship to Picard himself.",
+            "poster_path": "/cldAwhvBmOv9jrd3bXWuqRHoXyq.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                28,
+                12,
+                53
+            ],
+            "popularity": 2.7114,
+            "release_date": "2002-12-13",
+            "video": false,
+            "vote_average": 6.299,
+            "vote_count": 1564
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/rKr2NzAvxlTDCI7iSSNLaCXt0Aj.jpg",
+            "id": 15762,
+            "title": "Night of the Creeps",
+            "original_title": "Night of the Creeps",
+            "overview": "In 1959, an alien experiment crashes to earth and infects a fraternity member. They freeze the body, but in the modern day, two geeks pledging a fraternity accidentally thaw the corpse, which proceeds to infect the campus with parasites that transform their hosts into killer zombies.",
+            "poster_path": "/A3s2tQGNb6mhlr1hPZeE5F8IUwp.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                27,
+                35,
+                878
+            ],
+            "popularity": 1.6918,
+            "release_date": "1986-08-21",
+            "video": false,
+            "vote_average": 6.724,
+            "vote_count": 559
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/meqmvZjKpQ7WRhpZvIoKIAvioSD.jpg",
+            "id": 154,
+            "title": "Star Trek II: The Wrath of Khan",
+            "original_title": "Star Trek II: The Wrath of Khan",
+            "overview": "The starship Enterprise and its crew is pulled back into action when old nemesis, Khan, steals a top secret device called Project Genesis.",
+            "poster_path": "/uPyLsKl8Z0LOoxeaFXsY5MxhR5s.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                28,
+                12,
+                878,
+                53
+            ],
+            "popularity": 3.2963,
+            "release_date": "1982-06-04",
+            "video": false,
+            "vote_average": 7.446,
+            "vote_count": 2107
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/3C01kAcKGR6FwsUUSOvJ8N82pqr.jpg",
+            "id": 1086260,
+            "title": "The Astronaut",
+            "original_title": "The Astronaut",
+            "overview": "After returning from her first space mission, astronaut Sam Walker is placed under NASA\u2019s care at a high security house for rehabilitation and medical testing. However, when disturbing occurrences begin happening around the property, she fears that something extraterrestrial has followed her back to Earth",
+            "poster_path": "/souvvkJHYhztC1UqZ8lEVUiJa3J.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                27,
+                53
+            ],
+            "popularity": 8.8629,
+            "release_date": "2025-09-26",
+            "video": false,
+            "vote_average": 6.121,
+            "vote_count": 293
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/cqXEwYFcwyKPZCKl1jAPaG3cMsl.jpg",
+            "id": 13475,
+            "title": "Star Trek",
+            "original_title": "Star Trek",
+            "overview": "The fate of the galaxy rests in the hands of bitter rivals. One, James Kirk, is a delinquent, thrill-seeking Iowa farm boy. The other, Spock, a Vulcan, was raised in a logic-based society that rejects all emotion. As fiery instinct clashes with calm reason, their unlikely but powerful partnership is the only thing capable of leading their crew through unimaginable danger, boldly going where no one has gone before. The human adventure has begun again.",
+            "poster_path": "/hN2ZtF3Uw6mhIHZiqL0SKzELtKn.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                28,
+                12
+            ],
+            "popularity": 7.9487,
+            "release_date": "2009-05-06",
+            "video": false,
+            "vote_average": 7.43,
+            "vote_count": 10413
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/nNh7vHHISVAaziJEqAq0P9iL52w.jpg",
+            "id": 395992,
+            "title": "Life",
+            "original_title": "Life",
+            "overview": "The six-member crew of the International Space Station is tasked with studying a sample from Mars that may be the first proof of extra-terrestrial life, which proves more intelligent than ever expected.",
+            "poster_path": "/wztfli5NgYDgurVgShNflvnyA3Z.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                27,
+                878,
+                9648
+            ],
+            "popularity": 6.068,
+            "release_date": "2017-03-22",
+            "video": false,
+            "vote_average": 6.451,
+            "vote_count": 7874
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/1QV5TIM7pVm0wcWthKIAj7cXjbJ.jpg",
+            "id": 605722,
+            "title": "Long Distance",
+            "original_title": "Long Distance",
+            "overview": "After crash-landing on an alien planet, an asteroid miner must contend with the challenges of his new surroundings, while making his way across the harsh terrain to the only other survivor \u2013 a woman who is trapped in her escape pod.",
+            "poster_path": "/m5NKltgQqqyoWJNuK18IqEGRG7J.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                35,
+                28
+            ],
+            "popularity": 4.4175,
+            "release_date": "2024-07-12",
+            "video": false,
+            "vote_average": 6.4,
+            "vote_count": 239
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/i3IOqOFdAdjw0ebQXkIevybkkNF.jpg",
+            "id": 7453,
+            "title": "The Hitchhiker's Guide to the Galaxy",
+            "original_title": "The Hitchhiker's Guide to the Galaxy",
+            "overview": "Mere seconds before the Earth is to be demolished by an alien construction crew, Arthur Dent is swept off the planet by his friend Ford Prefect, a researcher penning a new edition of \"The Hitchhiker's Guide to the Galaxy.\"",
+            "poster_path": "/yr9A3KGQlxBh3yW0cmglsr8aMIz.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                12,
+                35,
+                878
+            ],
+            "popularity": 4.5579,
+            "release_date": "2005-04-28",
+            "video": false,
+            "vote_average": 6.683,
+            "vote_count": 4193
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/gHz4ZQytRs8YGrqFMwB3Vrr8pig.jpg",
+            "id": 274870,
+            "title": "Passengers",
+            "original_title": "Passengers",
+            "overview": "A spacecraft traveling to a distant colony planet and transporting thousands of people has a malfunction in its sleep chambers. As a result, two passengers are awakened 90 years early.",
+            "poster_path": "/jK9S6HANSf2no64v1x1HxfcpmcA.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                18,
+                10749,
+                878
+            ],
+            "popularity": 5.1801,
+            "release_date": "2016-12-21",
+            "video": false,
+            "vote_average": 6.952,
+            "vote_count": 14128
+        },
+        {
+            "adult": false,
+            "backdrop_path": "/ew3x9p8A28p3sLE8OaHwUsb1mSQ.jpg",
+            "id": 991,
+            "title": "The Man Who Fell to Earth",
+            "original_title": "The Man Who Fell to Earth",
+            "overview": "Thomas Jerome Newton is an alien who has come to Earth in search of water to save his home planet. Aided by lawyer Oliver Farnsworth, Thomas uses his knowledge of advanced technology to create profitable inventions. While developing a method to transport water, Thomas meets Mary-Lou, a quiet hotel clerk, and begins to fall in love with her. Just as he is ready to leave Earth, Thomas is intercepted by the U.S. government, and his entire plan is threatened.",
+            "poster_path": "/gwmPVphE5DMFFGXGMhfEFyxOOYj.jpg",
+            "media_type": "movie",
+            "original_language": "en",
+            "genre_ids": [
+                878,
+                18,
+                14
+            ],
+            "popularity": 1.6037,
+            "release_date": "1976-03-18",
+            "video": false,
+            "vote_average": 6.5,
+            "vote_count": 585
+        }
+    ],
+    "total_pages": 31,
+    "total_results": 611
+}

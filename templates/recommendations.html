@@ -1,0 +1,99 @@
+<!doctype html>
+
+<html>
+    <head>
+        <title>Movie Recommendation</title> 
+        <meta charset=utf-8> 
+        <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    </head>
+    <body>
+        <h1>Recommendations</h1>
+        <form action="/">
+            <input type="submit" value="<-" />
+        </form>
+        <div style="display:flex">
+            <div id="mynetwork"></div>
+            <div style="display: none; width: 20%" id="movieInfo" data-movie="">
+                <label id="movieTitle">Title:</label><br>
+                <label id="movieReleaseDate">Release Date:</label><br>
+                <label id="movieOverview">Cast:</label>
+            </div>
+        </div>
+
+        <!-- This is code is a slightly modified version of the example on the getting start part of:
+         https://visjs.github.io/vis-network/docs/network/
+
+         It looks like we can modify the options later to adjust the physics and appearance of the graph.
+          -->
+        <script type="text/javascript">
+            // Create an array with nodes
+            var nodes = new vis.DataSet([
+                {% for movie in recommendations %}
+                    { 
+                        // Attributes of each node in the graph
+
+                        // Corresponding id in graph
+                        id: {{ loop.index0 }}, 
+
+                        // Text that is shown on hover currently displays
+                        title: "{{movie.title}} ({{movie.release_date[:4]}})",
+
+                        // All of the extra movie info
+                        json: {{ movie.to_dict() | tojson }},
+
+                        // These attributes set the nodes' form to their movie poster
+                        shape: 'image', 
+                        image: "https://image.tmdb.org/t/p/original{{ movie.poster_path }}" 
+
+                    }{% if not loop.last %},{% endif %}
+                {% endfor %}
+            ]);
+
+            // Create an array with edges
+            var edgesArray = [];
+            for (let i = 1; i <= 21; i++) {
+                edgesArray.push({ from: 0, to: i });
+            }
+            var edges = new vis.DataSet(edgesArray);
+
+            // Create a network
+            var container = document.getElementById('mynetwork');
+
+            // Provide the data in the vis format
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {};
+
+            // Initialize the network
+            var network = new vis.Network(container, data, options);
+
+            // Node clicked behavior
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    var nodeId = params.nodes[0];
+                    console.log("Clicked node ID:", nodeId);
+                    
+                    var clickedNodeData = nodes.get(nodeId);
+                    console.log("Node Label:", clickedNodeData.title);
+
+                    console.log("Node Data:", clickedNodeData.json);
+
+                    movieInfo = document.getElementById("movieInfo");
+                    movieInfo.style.display="inline"
+
+                    movieTitle = document.getElementById("movieTitle");
+                    movieTitle.innerHTML = "<b>Title:</b> "+clickedNodeData.json["title"]
+                    movieTitle = document.getElementById("movieReleaseDate");
+                    movieTitle.innerHTML = "<b>Release Date:</b> "+clickedNodeData.json["release_date"]
+                    movieTitle = document.getElementById("movieOverview");
+                    movieTitle.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
+                }
+            });
+
+        </script>
+    </body>
+</html>

@@ -15,6 +15,9 @@ class Movie:
     def __str__(self):
         return str(self.title)
     
+    def to_dict(self):
+        return self.__dict__
+    
     # Creates a Movie object from the corresponding result in recommendations.json
     @classmethod
     def from_json(cls,result_number):

@@ -1,12 +1,16 @@
 # Movie Recommendation App
 A lightweight python application that uses graph data structures to generate a web of movie recommendations based on your last watch.
 ## Usage
-1. Input a TMDB api key at the top of get_recommendations.py
-2. Start the server
+1. Install the required python libraries
+```shell
+pip install flask requests
+```
+2. Input a TMDB api key at the top of get_recommendations.py
+3. Start the server
 ```shell
 python3 ./server.py
 ```
-3. [Click here](http://127.0.0.1:5000) to access the site
+4. [Click here](http://127.0.0.1:5000) to access the site
 ## Objectives
 ### Scripts
 - [x] Create function(s) to interface with [TMDB API](https://developer.themoviedb.org/docs/getting-started) (use /search -> /recommendations; will output a specified amount of recommended movies in a json file)
@@ -15,8 +19,10 @@ python3 ./server.py
 - [ ] Create an algorithm to rank the movies using and put them in a weighted graph (based on info such as: genre crossover, director, and lead actors)
 ### User Interface
 - [x] Basic flask setup with working connectivity
-- [ ] Display the recommendation web with labeled edges and movie posters from TMDB (distance of edge denotes similarity?)
-- [ ] Make the web more interactable (hover over to see movie details preview?)
+- [X] Display the recommendation web with movie posters from TMDB 
+- [X] Hover over to see movie details preview?
+- [ ] Complete the movie info side menu when (add director, cast, etc.) 
+- [ ] Give graph labeled edges (denoting similarity)
 - [ ] Offer suggested searches while entering your starting movie
 - [ ] Add option to input API key on the website
 

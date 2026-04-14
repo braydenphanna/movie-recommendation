@@ -17,14 +17,20 @@ python3 ./server.py
 - [x] Make a movie class (include most of the attributes that the json includes)
 - [x] Create a function to parse each movie entry in the outputted json file into individual movie objects
 - [ ] Create an algorithm to rank the movies using and put them in a weighted graph (based on info such as: genre crossover, director, and lead actors)
+- [ ] Create a rating System for each movie?
+- [ ] Create a watched list
+- [ ] Create a like/ dislike system for each watched movie?
+
 ### User Interface
 - [x] Basic flask setup with working connectivity
 - [X] Display the recommendation web with movie posters from TMDB 
 - [X] Hover over to see movie details preview?
+- [ ] Zoom into a movie when selected
 - [ ] Complete the movie info side menu when (add director, cast, etc.) 
 - [ ] Give graph labeled edges (denoting similarity)
 - [ ] Offer suggested searches while entering your starting movie
 - [ ] Add option to input API key on the website
+
 
 ## Tech Stack
 ### Frontend

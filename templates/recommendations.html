@@ -13,12 +13,15 @@
         <form action="/">
             <input type="submit" value="<-" />
         </form>
-        <div style="display:flex">
+        <div id="main" style="display:flex">
             <div id="mynetwork"></div>
             <div style="display: none; width: 20%" id="movieInfo" data-movie="">
                 <label id="movieTitle">Title:</label><br>
                 <label id="movieReleaseDate">Release Date:</label><br>
-                <label id="movieOverview">Cast:</label>
+                <label id="movieOverview">Overview:</label><br>
+                <label id="movieDirector">Director:</label><br>
+                <label id="movieCast">Cast:</label><br>
+                <label id="movieIMDB">IMDB:</label><br>
             </div>
         </div>
 
@@ -42,7 +45,7 @@
 
                         // All of the extra movie info
                         json: {{ movie.to_dict() | tojson }},
-
+                        
                         // These attributes set the nodes' form to their movie poster
                         shape: 'image', 
                         image: "https://image.tmdb.org/t/p/original{{ movie.poster_path }}" 
@@ -66,34 +69,64 @@
                 nodes: nodes,
                 edges: edges
             };
-            var options = {};
+            const options = {
+                nodes: {
+                    color: {
+                        
+                        border: '#2B7CE9'
+                    },
+                    shapeProperties: {
+                        useBorderWithImage: true
+                    },
+                    borderWidth: 0,
+                    borderWidthSelected: 4
+                }
+            };
 
             // Initialize the network
             var network = new vis.Network(container, data, options);
 
             // Node clicked behavior
-            network.on("click", function (params) {
+            network.on("selectNode", function (params) {
                 if (params.nodes.length > 0) {
                     var nodeId = params.nodes[0];
-                    console.log("Clicked node ID:", nodeId);
                     
+                    // Print debug info to browser console
+                    console.log("Clicked node ID:", nodeId);
                     var clickedNodeData = nodes.get(nodeId);
                     console.log("Node Label:", clickedNodeData.title);
-
                     console.log("Node Data:", clickedNodeData.json);
-
+                    
+                    // Hide any old movie info while new info is loading
                     movieInfo = document.getElementById("movieInfo");
-                    movieInfo.style.display="inline"
+                    movieInfo.style.display="none";
 
-                    movieTitle = document.getElementById("movieTitle");
-                    movieTitle.innerHTML = "<b>Title:</b> "+clickedNodeData.json["title"]
-                    movieTitle = document.getElementById("movieReleaseDate");
-                    movieTitle.innerHTML = "<b>Release Date:</b> "+clickedNodeData.json["release_date"]
-                    movieTitle = document.getElementById("movieOverview");
-                    movieTitle.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
+                    fetch("/moreinfo/"+clickedNodeData.json['id'])
+                    .then(response => response.json()) // Parse JSON response
+                    .then(data => {
+                        console.log(data); // Access data from Python
+
+                        movieInfo.style.display="inline";
+                        movieTitle = document.getElementById("movieTitle");
+                        movieTitle.innerHTML = "<b>Title:</b> "+clickedNodeData.json["title"]
+                        movieReleaseDate = document.getElementById("movieReleaseDate");
+                        movieReleaseDate.innerHTML = "<b>Release Date:</b> "+clickedNodeData.json["release_date"]
+
+                        movieDirector = document.getElementById("movieDirector");
+                        movieDirector.innerHTML = "<b>Director:</b> "+data["director"]
+                        movieCast = document.getElementById("movieCast");
+                        movieCast.innerHTML = "<b>Cast:</b> "+data["cast"].join(", ");
+
+                        movieOverview = document.getElementById("movieOverview");
+                        movieOverview.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
+
+                        movieIMDB = document.getElementById("movieIMDB");
+                        movieIMDB.innerHTML = "<a href='"+data["imdb"]+"' target='_blank'>IMDB</a>"
+                    })
+                    .catch(error => console.error('Error:', error));
                 }
             });
-
+            
         </script>
     </body>
 </html>

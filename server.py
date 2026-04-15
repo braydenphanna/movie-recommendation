@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request,jsonify
-import get_recommendations
+import api
 from movie import Movie
 
 app = Flask(__name__)
@@ -12,12 +12,11 @@ def index():
 
 @app.route('/recommendations/', methods=['GET', 'POST'])
 def recommend():
-    return render_template('recommendations.html', recommendations=get_recommendations.search(request.form['query']))
+    return render_template('recommendations.html', recommendations=api.get_recommendations(request.form['query'],15))
 
-@app.route('/movie')
-def movie():
-    movie = Movie()
-    return jsonify(movie.to_dict())
+@app.route('/moreinfo/<id>')
+def more_info(id):
+    return api.get_more_info(id)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,port=8000)

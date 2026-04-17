@@ -9,16 +9,25 @@
 
     </head>
     <body>
-        <h1>Recommendations</h1>
-        <form action="/">
-            <input type="submit" value="<-" />
-        </form>
-        <div style="display:flex">
+        <div id="header" style="display:flex">
+            <form action="/">
+                <input type="submit" value="<-" />
+            </form>
+            <h1>Recommendations</h1>
+            <div>
+                <input type="checkbox" id="weightToggle">
+                <label for="weightToggle">Show weights</label>
+            </div>
+        </div>
+        <div id="main" style="display:flex">
             <div id="mynetwork"></div>
             <div style="display: none; width: 20%" id="movieInfo" data-movie="">
                 <label id="movieTitle">Title:</label><br>
                 <label id="movieReleaseDate">Release Date:</label><br>
-                <label id="movieOverview">Cast:</label>
+                <label id="movieOverview">Overview:</label><br>
+                <label id="movieDirector">Director:</label><br>
+                <label id="movieCast">Cast:</label><br>
+                <label id="movieIMDB">IMDB:</label><br>
             </div>
         </div>
 
@@ -29,6 +38,7 @@
           -->
         <script type="text/javascript">
             // Create an array with nodes
+
             var nodes = new vis.DataSet([
                 {% for movie in recommendations %}
                     { 
@@ -42,7 +52,7 @@
 
                         // All of the extra movie info
                         json: {{ movie.to_dict() | tojson }},
-
+                        
                         // These attributes set the nodes' form to their movie poster
                         shape: 'image', 
                         image: "https://image.tmdb.org/t/p/original{{ movie.poster_path }}" 
@@ -51,13 +61,29 @@
                 {% endfor %}
             ]);
 
-            // Create an array with edges
-            var edgesArray = [];
-            for (let i = 1; i <= 21; i++) {
-                edgesArray.push({ from: 0, to: i });
-            }
-            var edges = new vis.DataSet(edgesArray);
+            var edges = new vis.DataSet([]);
 
+            for (let i = 1; i <= 15; i++) {
+                edges.add({
+                    id: i,
+                    from: 0,
+                    to: i,
+                    value: 1,
+                    
+                });
+            }
+
+            // Fetch similarity and update edges
+            for (let i = 1; i <= 15; i++) {
+                fetch(`/getsimilarity/0/${i}`)
+                .then(r => r.json())
+                .then(data => {
+                    edges.update({
+                        id: i,
+                        label: (data.toFixed(2) * 100) + "%"
+                    });
+                });
+            }   
             // Create a network
             var container = document.getElementById('mynetwork');
 
@@ -66,32 +92,99 @@
                 nodes: nodes,
                 edges: edges
             };
-            var options = {};
+            const options = {
+                nodes: {
+                    color: {
+                        
+                        border: '#2B7CE9'
+                    },
+                    shapeProperties: {
+                        useBorderWithImage: true
+                    },
+                    borderWidth: 0,
+                    borderWidthSelected: 4
+                },
+                edges: {
+                    scaling: {
+                        min: 1,
+                        max: 1
+                    },
+                    font: {
+                            color: 'transparent',
+                            strokeWidth: 0 
+                    }
+                }
+            };
 
             // Initialize the network
             var network = new vis.Network(container, data, options);
 
             // Node clicked behavior
-            network.on("click", function (params) {
+            network.on("selectNode", function (params) {
                 if (params.nodes.length > 0) {
                     var nodeId = params.nodes[0];
-                    console.log("Clicked node ID:", nodeId);
                     
+                    // Print debug info to browser console
+                    console.log("Clicked node ID:", nodeId);
                     var clickedNodeData = nodes.get(nodeId);
                     console.log("Node Label:", clickedNodeData.title);
-
                     console.log("Node Data:", clickedNodeData.json);
 
-                    movieInfo = document.getElementById("movieInfo");
-                    movieInfo.style.display="inline"
+                    // Zoom in on select
+                    network.focus(nodeId, {
+                        scale: 8,
+                        animation: { duration: 500 }
+                    });
 
-                    movieTitle = document.getElementById("movieTitle");
-                    movieTitle.innerHTML = "<b>Title:</b> "+clickedNodeData.json["title"]
-                    movieTitle = document.getElementById("movieReleaseDate");
-                    movieTitle.innerHTML = "<b>Release Date:</b> "+clickedNodeData.json["release_date"]
-                    movieTitle = document.getElementById("movieOverview");
-                    movieTitle.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
+                    // Hide any old movie info while new info is loading
+                    movieInfo = document.getElementById("movieInfo");
+                    movieInfo.style.display="none";
+
+                    fetch("/moreinfo/"+clickedNodeData.json['id'])
+                    .then(response => response.json()) // Parse JSON response
+                    .then(data => {
+                        console.log(data); // Access data from Python
+
+                        movieInfo.style.display="inline";
+                        movieTitle = document.getElementById("movieTitle");
+                        movieTitle.innerHTML = "<b>Title:</b> "+clickedNodeData.json["title"]
+                        movieReleaseDate = document.getElementById("movieReleaseDate");
+                        movieReleaseDate.innerHTML = "<b>Release Date:</b> "+clickedNodeData.json["release_date"]
+
+                        movieDirector = document.getElementById("movieDirector");
+                        movieDirector.innerHTML = "<b>Director:</b> "+data["director"]
+                        movieCast = document.getElementById("movieCast");
+                        movieCast.innerHTML = "<b>Cast:</b> "+data["cast"].join(", ");
+
+                        movieOverview = document.getElementById("movieOverview");
+                        movieOverview.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
+
+                        movieIMDB = document.getElementById("movieIMDB");
+                        movieIMDB.innerHTML = "<a href='"+data["imdb"]+"' target='_blank'>IMDB</a>";
+
+                    })
+                    .catch(error => console.error('Error:', error));
                 }
+            });
+            network.on('deselectNode', function (params) {
+                // Zoom out on deselect
+                if (network.getSelectedNodes().length === 0) {
+                    network.fit({ animation: { duration: 500 } });
+                    movieInfo.style.display="none";
+                }
+            });
+
+            // Weight toggle logic
+            document.getElementById('weightToggle').addEventListener('change', function(e) {
+                const showLabels = e.target.checked;
+                network.setOptions({
+                    edges: {
+                        font: {
+                            color: showLabels ? '#343434' : 'transparent', 
+                            strokeWidth: showLabels ? 2 : 0 
+                        }
+                    }
+                });
             });
 
         </script>

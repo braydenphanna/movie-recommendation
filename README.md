@@ -1,30 +1,37 @@
-# Movie Recommendation App
-A lightweight python application that uses graph data structures to generate a web of movie recommendations based on your last watch.
+# Movie Recommendation
+A lightweight python application that employs a graph data structure to generate a web of movie recommendations based on your last watch.
 ## Usage
 1. Install the required python libraries
 ```shell
 pip install flask requests
 ```
-2. Input a TMDB api key at the top of get_recommendations.py
-3. Start the server
+2. Start the server
 ```shell
 python3 ./server.py
 ```
-4. [Click here](http://127.0.0.1:5000) to access the site
+3. [Click here](http://127.0.0.1:8000) to access the site
+4. Input a valid TMDB API Key using the button in the top right corner of the home page
 ## Objectives
 ### Scripts
 - [x] Create function(s) to interface with [TMDB API](https://developer.themoviedb.org/docs/getting-started) (use /search -> /recommendations; will output a specified amount of recommended movies in a json file)
 - [x] Make a movie class (include most of the attributes that the json includes)
 - [x] Create a function to parse each movie entry in the outputted json file into individual movie objects
-- [ ] Create an algorithm to rank the movies using and put them in a weighted graph (based on info such as: genre crossover, director, and lead actors)
+- [X] Create a simple algorithm to rank the movies using and put them in a weighted graph
+- [ ] Create a more complex algorithm to rank the movies using and put them in a weighted graph (based on info such as: genre crossover, director, and lead actors)
+- [ ] Create a rating System for each movie?
+- [ ] Create a watched list
+- [ ] Create a like/ dislike system for each watched movie?
+
 ### User Interface
 - [x] Basic flask setup with working connectivity
 - [X] Display the recommendation web with movie posters from TMDB 
 - [X] Hover over to see movie details preview?
-- [ ] Complete the movie info side menu when (add director, cast, etc.) 
-- [ ] Give graph labeled edges (denoting similarity)
+- [X] Add more info to side menu (add director, cast, imdb) 
+- [X] Zoom into a movie when selected
+- [X] Give graph labeled edges (denoting similarity)
+- [X] Add option to input API key on the website
 - [ ] Offer suggested searches while entering your starting movie
-- [ ] Add option to input API key on the website
+- [ ] Make everyting look more appealing (change colors, fonts, etc.)
 
 ## Tech Stack
 ### Frontend

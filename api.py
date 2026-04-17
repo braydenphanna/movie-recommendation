@@ -1,6 +1,7 @@
 import requests
 import json
 from movie import Movie
+import algorithms
 
 # Enter an api key here
 api_key=""
@@ -37,6 +38,7 @@ def get_recommendations(query, num):
     for n in range(num):
         movies.append(Movie.from_json(n))
 
+    algorithms.get_similarity(movies[0],movies[1])
     return movies
 
 # Gets more movie info for a specific movie (credits and imdb id)
@@ -53,3 +55,25 @@ def get_more_info(query):
     }
 
     return extra_info
+
+def set_key(key):
+    global api_key
+    api_key = key
+    
+    global headers 
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer "+ api_key
+    }
+
+def test_key(key):
+    url = f"https://api.themoviedb.org/3/movie/popular"
+    response = requests.get(url, headers={
+        "accept": "application/json",
+        "Authorization": "Bearer "+ key
+    })
+
+    if response.status_code == 200:
+        return True
+    else:
+        return False

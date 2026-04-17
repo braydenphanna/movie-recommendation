@@ -7,11 +7,31 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
+        <input type="submit" id="apiKeyButton" value="API Key" style="float: right; margin-right: 1%;" />
+        <label style = "float: right; margin-right: 1%; display: none; color: green" id="submittedText">Valid API Key</label>
         <h1>Movie Recommendation</h1>
         <form action="/recommendations/" method="POST">
             <label>Search: </label>
             <input type="text" name = "query"/>
             <input type="submit" value="->" />
         </form>
+
+        <dialog id="settingsPopup">
+            <form action="/setapikey/" method="POST">
+                <label for="textInput">Enter API Key:</label>
+                <input type="text" id="textInput" name="apikey">
+                <button type="submit" formmethod="dialog">Cancel</button>
+                <button type="submit" id="confirmApiKey">Submit</button>
+            </form>
+        </dialog>
+
+        <script>
+            {% if valid is true%}
+                document.getElementById('apiKeyButton').style.display = "none";
+                document.getElementById('submittedText').style.display = "flex";
+            {% endif %}
+            dialog = document.getElementById('settingsPopup');
+            document.getElementById('apiKeyButton').onclick = () => dialog.showModal();
+        </script>
     </body>
 </html>

@@ -1,15 +1,21 @@
 html, body {
-  height: 100%;
-  margin: 0;
+    height: 100%;
+    margin: 0;
 }
 
+#header {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+}
 #main{
-  height: 100%;
-  margin: 0;
+    height: 100%;
+    margin: 0;
 }
 
 #mynetwork {
-                width: 80%;
-                height: 80%;
-                border: 1px solid lightgray;
-            }
+    width: 80%;
+    height: 80%;
+    border: 1px solid lightgray;
+}
+

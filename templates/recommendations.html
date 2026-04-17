@@ -9,10 +9,16 @@
 
     </head>
     <body>
-        <h1>Recommendations</h1>
-        <form action="/">
-            <input type="submit" value="<-" />
-        </form>
+        <div id="header" style="display:flex">
+            <form action="/">
+                <input type="submit" value="<-" />
+            </form>
+            <h1>Recommendations</h1>
+            <div>
+                <input type="checkbox" id="weightToggle">
+                <label for="weightToggle">Show weights</label>
+            </div>
+        </div>
         <div id="main" style="display:flex">
             <div id="mynetwork"></div>
             <div style="display: none; width: 20%" id="movieInfo" data-movie="">
@@ -32,6 +38,7 @@
           -->
         <script type="text/javascript">
             // Create an array with nodes
+
             var nodes = new vis.DataSet([
                 {% for movie in recommendations %}
                     { 
@@ -54,13 +61,29 @@
                 {% endfor %}
             ]);
 
-            // Create an array with edges
-            var edgesArray = [];
-            for (let i = 1; i <= 21; i++) {
-                edgesArray.push({ from: 0, to: i });
-            }
-            var edges = new vis.DataSet(edgesArray);
+            var edges = new vis.DataSet([]);
 
+            for (let i = 1; i <= 15; i++) {
+                edges.add({
+                    id: i,
+                    from: 0,
+                    to: i,
+                    value: 1,
+                    
+                });
+            }
+
+            // Fetch similarity and update edges
+            for (let i = 1; i <= 15; i++) {
+                fetch(`/getsimilarity/0/${i}`)
+                .then(r => r.json())
+                .then(data => {
+                    edges.update({
+                        id: i,
+                        label: (data.toFixed(2) * 100) + "%"
+                    });
+                });
+            }   
             // Create a network
             var container = document.getElementById('mynetwork');
 
@@ -80,6 +103,16 @@
                     },
                     borderWidth: 0,
                     borderWidthSelected: 4
+                },
+                edges: {
+                    scaling: {
+                        min: 1,
+                        max: 1
+                    },
+                    font: {
+                            color: 'transparent',
+                            strokeWidth: 0 
+                    }
                 }
             };
 
@@ -96,7 +129,13 @@
                     var clickedNodeData = nodes.get(nodeId);
                     console.log("Node Label:", clickedNodeData.title);
                     console.log("Node Data:", clickedNodeData.json);
-                    
+
+                    // Zoom in on select
+                    network.focus(nodeId, {
+                        scale: 8,
+                        animation: { duration: 500 }
+                    });
+
                     // Hide any old movie info while new info is loading
                     movieInfo = document.getElementById("movieInfo");
                     movieInfo.style.display="none";
@@ -121,12 +160,33 @@
                         movieOverview.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
 
                         movieIMDB = document.getElementById("movieIMDB");
-                        movieIMDB.innerHTML = "<a href='"+data["imdb"]+"' target='_blank'>IMDB</a>"
+                        movieIMDB.innerHTML = "<a href='"+data["imdb"]+"' target='_blank'>IMDB</a>";
+
                     })
                     .catch(error => console.error('Error:', error));
                 }
             });
-            
+            network.on('deselectNode', function (params) {
+                // Zoom out on deselect
+                if (network.getSelectedNodes().length === 0) {
+                    network.fit({ animation: { duration: 500 } });
+                    movieInfo.style.display="none";
+                }
+            });
+
+            // Weight toggle logic
+            document.getElementById('weightToggle').addEventListener('change', function(e) {
+                const showLabels = e.target.checked;
+                network.setOptions({
+                    edges: {
+                        font: {
+                            color: showLabels ? '#343434' : 'transparent', 
+                            strokeWidth: showLabels ? 2 : 0 
+                        }
+                    }
+                });
+            });
+
         </script>
     </body>
 </html>

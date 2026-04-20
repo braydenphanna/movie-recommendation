@@ -1,9 +1,11 @@
 # &#x1F578;&#xFE0E; CineWeb
 A web-based application that employs graph data structures to generate a web of movie recommendations based on your last watch.
+## Demo
+[Click here](https://cineweb.pythonanywhere.com) to try the web demo.
 ## Usage
 1. Install the required python libraries
 ```shell
-pip install flask
+pip install flask requests
 ```
 2. Start the server
 ```shell

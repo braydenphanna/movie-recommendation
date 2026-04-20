@@ -20,12 +20,40 @@
         <div id="r-main">
             <div id="mynetwork"></div>
             <div id="movieInfo" data-movie="">
-                <label id="movieTitle">Title:</label><br>
-                <label id="movieReleaseDate">Release Date:</label><br>
-                <label id="movieOverview">Overview:</label><br>
-                <label id="movieDirector">Director:</label><br>
-                <label id="movieCast">Cast:</label><br>
-                <label id="movieIMDB">IMDB:</label><br>
+                <center>
+                    <label style="font-weight:bold; font-size: 40px;" id="movieTitle"></label><br>
+                    <label style="font-weight:bold; font-size: 20px; color:lightgray" id="movieReleaseDate"></label>
+                    <label style="color:lightgray" id="movieDirector">Directed by</label>
+                </center><br>
+                <label style="color:lightgray; font-weight:bold;" id="movieTagline"></label>
+                <label style="color:lightgray" id="movieOverview"></label><br><br>
+                <div>
+                    <input type="radio" name="tabs" id="cast" checked>
+                    <input type="radio" name="tabs" id="crew">
+                    <input type="radio" name="tabs" id="genres">
+                    <input type="radio" name="tabs" id="details">
+
+                    <div class="tabs">
+                        <label class="tab" for="cast">Cast</label>
+                        <label class="tab" for="crew">Crew</label>
+                        <label class="tab" for="genres">Genres</label>
+                        <label class="tab" for="details">Details</label>
+                    </div>
+                    <div id="content-cast">
+                        <div id="movieCast" class="peopleScroll"></div>
+                    </div>
+
+                    <div id="content-crew">
+                        <div id="movieCrew" class="peopleScroll"></div>
+                    </div>
+                    <div id="content-genres">
+                        <div id="movieGenres"></div>
+                    </div>
+                    <div id="content-details">
+                        <label id="movieDetails"></label><br>
+                        <label id="movieIMDB">IMDB</label><br>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -146,20 +174,34 @@
                         movieInfo.classList.add("active");
                         
                         movieTitle = document.getElementById("movieTitle");
-                        movieTitle.innerHTML = "<b>Title:</b> "+clickedNodeData.json["title"]
+                        movieTitle.innerHTML = clickedNodeData.json["title"];
+                        
                         movieReleaseDate = document.getElementById("movieReleaseDate");
-                        movieReleaseDate.innerHTML = "<b>Release Date:</b> "+clickedNodeData.json["release_date"]
+                        movieReleaseDate.innerHTML = clickedNodeData.json["release_date"].substring(0,4);
 
                         movieDirector = document.getElementById("movieDirector");
-                        movieDirector.innerHTML = "<b>Director:</b> "+data["director"]
+                        movieDirector.innerHTML = "&nbsp;Directed by "+data["director"].join(", ");
+
                         movieCast = document.getElementById("movieCast");
-                        movieCast.innerHTML = "<b>Cast:</b> "+data["cast"].join(", ");
+                        populate_people(movieCast, data);
+
+                        movieCrew = document.getElementById("movieCrew");
+                        populate_people(movieCrew, data);
+
+                        movieTagline = document.getElementById("movieTagline");
+                        if(data["tagline"]!="") movieTagline.innerHTML = data["tagline"]+"<br><br>";
 
                         movieOverview = document.getElementById("movieOverview");
-                        movieOverview.innerHTML = "<b>Overview:</b> "+clickedNodeData.json["overview"]
+                        movieOverview.innerHTML = clickedNodeData.json["overview"];
+
+                        movieGenres = document.getElementById("movieGenres");
+                        movieGenres.innerHTML = data["genres"].join("<br>");
+
+                        movieDetails = document.getElementById("movieDetails");
+                        movieDetails.innerHTML = data["details"].join("<br>");
 
                         movieIMDB = document.getElementById("movieIMDB");
-                        movieIMDB.innerHTML = "<a href='"+data["imdb"]+"' target='_blank'>IMDB</a>";
+                        movieIMDB.innerHTML = "<b><a href='"+data["imdb"]+"' target='_blank'>IMDB</a></b>";
                     })
                     .catch(error => console.error('Error:', error));
                 }
@@ -185,6 +227,34 @@
                     }
                 });
             });
+
+            function populate_people(group, data){
+                group.innerHTML="";
+                for(var i = 0; i<data[group.id].length; i++){
+                    personImage = document.createElement("img");
+                    personImage.src = "{{ url_for('static', filename='blank_person.png') }}";
+                    if(data[group.id+"_images"][i]!=null) personImage.src = "https://image.tmdb.org/t/p/original/"+data[group.id+"_images"][i];
+                    personImage.width=100;
+                    personImage.height=150;
+                    personName = document.createElement("label");
+                    personName.innerHTML = data[group.id][i];
+                    personRole = document.createElement("label");
+                    personRole.style.color = "Gray";
+                    if(group.id==="movieCast"){
+                        personRole.innerHTML = data[group.id+"_characters"][i];
+                    }else if(group.id==="movieCrew"){
+                        personRole.innerHTML = data[group.id+"_jobs"][i];
+                    }
+
+                    person = document.createElement("div");
+                    person.appendChild(personImage);
+                    person.appendChild(personName);
+                    person.appendChild(personRole);
+                    person.id="person";
+                    group.appendChild(person);
+                }
+                return group;
+            }
         </script>
     </body>
 </html>

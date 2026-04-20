@@ -33,7 +33,6 @@ python3 ./server.py
 - [X] Give graph labeled edges (denoting similarity)
 - [X] Add option to input API key on the website
 - [X] Make everyting look more appealing (change colors, fonts, etc.)
-- [ ] Do finishing visual touches (adjust various minor details such as API Key button)
 - [ ] Offer suggested searches while entering your starting movie
 
 ## Tech Stack

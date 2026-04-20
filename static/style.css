@@ -90,6 +90,7 @@ body {
     border-radius: 5px;
     box-sizing: border-box;
     background-color: #14181c;
+    padding: 0.5%;
 
     overflow-y: auto;
 
@@ -159,4 +160,84 @@ input[type="submit"]{
     font-size: 20px;
     background-color: #20262E;
     color: #eef0f2;
+}
+
+/* 
+    I referenced this resource for the [Cast|Crew|Genres|Details] menu
+
+    https://matemarschalko.medium.com/lets-build-a-css-only-tabbed-content-switching-ui-component-e711e195406b
+*/
+
+#content-cast,
+#content-crew,
+#content-genres,
+#content-details {
+    display: none;
+}
+
+#cast:checked ~ #content-cast,
+#crew:checked ~ #content-crew,
+#genres:checked ~ #content-genres,
+#details:checked ~ #content-details {
+    display: block;
+}
+
+[type="radio"] {
+    display: none;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+}
+
+.tab {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #2c3440;
+    background-color: #20262E;
+    box-sizing: border-box;
+    flex: 1; 
+}
+.tab[for="cast"]{
+    border-radius: 5px 0px 0px 0px;
+}
+.tab[for="details"]{
+    border-radius: 0px 5px 0px 0px;
+}
+
+[id^="content"] {
+    display: none;
+    padding: 0.5%;
+    border: 1px solid #2c3440;
+    background-color: #14181c;
+    border-radius: 0px 0px 5px 5px;
+}
+
+#cast:checked ~ .tabs label[for="cast"],
+#crew:checked ~ .tabs label[for="crew"],
+#genres:checked ~ .tabs label[for="genres"],
+#details:checked ~ .tabs label[for="details"] {
+  background-color: #14181c;
+}
+
+.tab:hover {
+  text-decoration: underline;
+}
+
+#person {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #2c3440;
+    border-radius: 5px;
+    width:fit-content;
+    margin-bottom: 3.5%;
+}
+
+
+.peopleScroll {
+    display:flex; 
+    gap:0.5%;
+    overflow-x: scroll;
 }

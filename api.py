@@ -45,13 +45,23 @@ def get_recommendations(query, num):
 def get_more_info(query):
     url = "https://api.themoviedb.org/3/movie/"+str(query)+"/credits?language=en-US"
     credits = requests.get(url, headers=headers).json()
-    url = "https://api.themoviedb.org/3/movie/"+str(query)+"/external_ids"
-    ext_ids = requests.get(url, headers=headers).json()
+    url = "https://api.themoviedb.org/3/movie/"+str(query)+"?language=en-US"
+    details = requests.get(url, headers=headers).json()
 
     extra_info = {
-        "director": [member for member in credits['crew'] if member['job'] == 'Director'][0]["name"],
-        "cast": [member['name'] for member in credits.get('cast', [])[:10]],
-        "imdb": "https://www.imdb.com/title/"+ext_ids['imdb_id']
+        "director": [member["name"] for member in [member for member in credits['crew'] if member['job'] == 'Director']],
+        "tagline": details['tagline'],
+        "movieCast": [member['name'] for member in credits.get('cast', [])],
+        "movieCast_images": [member['profile_path'] for member in credits.get('cast', [])],
+        "movieCast_characters": [member['character'] for member in credits.get('cast', [])],
+        "movieCrew": [member['name'] for member in credits.get('crew', [])],
+        "movieCrew_images": [member['profile_path'] for member in credits.get('crew', [])],
+        "movieCrew_jobs": [member['job'] for member in credits.get('crew', [])],
+        "genres": [member['name'] for member in details.get('genres', [])],
+        "details": ["<b>Runtime:</b> " +str(details['runtime'])+" mins", 
+                    "<b>Release Date:</b> " +str(details['release_date']),
+                    "<b>Production Companies:</b><br>" +"<br>".join([member['name'] for member in details.get('production_companies', [])])],
+        "imdb": "https://www.imdb.com/title/"+details['imdb_id']
     }
 
     return extra_info

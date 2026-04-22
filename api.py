@@ -12,36 +12,25 @@ headers = {
 }
 
 # Takes a TMDB ID and a number of results (up to 20)
-def get_recommendations(query, num): 
-    # make sure num isn't over 20
-    if(num>20): num=20
+def get_recommendations(id, num):
+    num = min(num, 20)
+    movies = []
 
-    movies=[]
+    # Get main movie
+    movie_url = "https://api.themoviedb.org/3/movie/"+id+"?language=en-US"
+    movie_data = requests.get(movie_url, headers=headers).json()
+    movies.append(Movie.from_json(movie_data))
 
-    # Get corresponding movie ID
-    url = "https://api.themoviedb.org/3/search/movie?query="+query+"&include_adult=false&language=en-US&page=1"
-    search_results = requests.get(url, headers=headers)
-    id = search_results.json()["results"][0]["id"]
+    # Get recommendations
+    rec_url = "https://api.themoviedb.org/3/movie/"+id+"/recommendations?language=en-US&page=1"
+    rec_data = requests.get(rec_url, headers=headers).json()
 
-    # Add starting movie to movies list at index 0
-    with open("recommendations.json", "w") as file:
-        json.dump(search_results.json(), file, indent=4)
-    movies.append(Movie.from_json(0))
+    for entry in rec_data.get("results", [])[:num]:
+        movies.append(Movie.from_json(entry))
 
-    # Write similar movie recommendations to recommendations.json
-    url = "https://api.themoviedb.org/3/movie/"+str(id)+"/recommendations?language=en-US&page=1"
-    recommendations = requests.get(url, headers=headers)
-
-    # Add 20 recommended movies to movies list at indeces 1-21
-    with open("recommendations.json", "w") as file:
-        json.dump(recommendations.json(), file, indent=4)
-    for n in range(num):
-        movies.append(Movie.from_json(n))
-
-    algorithms.get_similarity(movies[0],movies[1])
     return movies
 
-# Gets more movie info for a specific movie (credits and imdb id)
+# Gets more movie info for a specific movie
 def get_more_info(query):
     url = "https://api.themoviedb.org/3/movie/"+str(query)+"/credits?language=en-US"
     credits = requests.get(url, headers=headers).json()
@@ -65,6 +54,18 @@ def get_more_info(query):
     }
 
     return extra_info
+
+def search(query):
+    url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page=1"
+    data = requests.get(url, headers=headers).json()
+
+    movies = []
+
+    results = data.get("results", [])
+    for entry in results[:10]:  # limit to 10 safely
+        movies.append(Movie.from_json(entry).to_dict())
+
+    return movies
 
 def set_key(key):
     global api_key

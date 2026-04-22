@@ -11,24 +11,31 @@ recommendations = []
 def index():
     return render_template('index.html', valid=api.test_key(api.api_key))
 
-@app.route('/recommendations/', methods=['GET', 'POST'])
-def recommend():
+@app.route('/recommendations/<id>', methods=['GET', 'POST'])
+def recommend(id):
     global recommendations
 
-    query = request.values.get('query')
-
-    if not query:
+    if not id:
         return render_template('index.html', valid=api.test_key(api.api_key), error="Empty Query")
 
     if not api.test_key(api.api_key):
         return render_template('index.html', valid=api.test_key(api.api_key), error="Invalid API Key")
 
-    recommendations = api.get_recommendations(query, 15)
+    recommendations = api.get_recommendations(id, 10)
     return render_template('recommendations.html', recommendations=recommendations)
+
+@app.route('/more_recommendations/<id>')
+def more_recommendations(id):
+    movies = api.get_recommendations(id, 5)
+    return jsonify([m.to_dict() for m in movies])
 
 @app.route('/moreinfo/<id>')
 def more_info(id):
     return api.get_more_info(id)
+
+@app.route('/search/<name>')
+def search(name):
+    return api.search(name)
 
 @app.route('/getsimilarity/<id1>/<id2>')
 def get_similarity(id1,id2):

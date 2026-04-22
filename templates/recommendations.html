@@ -54,6 +54,10 @@
                         <label id="movieIMDB">IMDB</label><br>
                     </div>
                 </div>
+                <div>
+                    <input type="submit" id ="likeButton" value="👍"/>
+                    <input type="submit" id ="dislikeButton" value="👎"/>
+                </div>
             </div>
         </div>
 
@@ -63,8 +67,12 @@
          It looks like we can modify the options later to adjust the physics and appearance of the graph.
           -->
         <script type="text/javascript">
-            // Create an array with nodes
+            // Net node and edge amounts
+            netNodes=0;
+            netEdges=0;
+            blacklist = [];
 
+            // Create an array with nodes
             var nodes = new vis.DataSet([
                 {% for movie in recommendations %}
                     { 
@@ -86,21 +94,22 @@
                     }{% if not loop.last %},{% endif %}
                 {% endfor %}
             ]);
+            netNodes+=nodes.length;
 
             var edges = new vis.DataSet([]);
 
-            for (let i = 1; i <= 15; i++) {
+            for (let i = 1; i <= 10; i++) {
                 edges.add({
                     id: i,
                     from: 0,
                     to: i,
-                    value: 1,
-                    
+                    value: 1
                 });
+                netEdges++;
             }
 
             // Fetch similarity and update edges
-            for (let i = 1; i <= 15; i++) {
+            for (let i = 1; i <= edges.length; i++) {
                 fetch(`/getsimilarity/0/${i}`)
                 .then(r => r.json())
                 .then(data => {
@@ -202,6 +211,14 @@
 
                         movieIMDB = document.getElementById("movieIMDB");
                         movieIMDB.innerHTML = "<b><a href='"+data["imdb"]+"' target='_blank'>IMDB</a></b>";
+
+                        likeButton = document.getElementById("likeButton");
+                        likeButton.dataset.id = clickedNodeData.json["id"];
+                        likeButton.dataset.nodeId = nodeId;
+
+                        dislikeButton = document.getElementById("dislikeButton");
+                        dislikeButton.dataset.id = clickedNodeData.json["id"];
+                        dislikeButton.dataset.nodeId = nodeId;
                     })
                     .catch(error => console.error('Error:', error));
                 }
@@ -214,7 +231,7 @@
                     movieInfo.classList.remove("active");
                 }
             });
-
+            
             // Weight toggle logic
             document.getElementById('weightToggle').addEventListener('change', function(e) {
                 const showLabels = e.target.checked;
@@ -226,6 +243,79 @@
                         }
                     }
                 });
+            });
+            
+            // Like button logic
+            likeButton = document.getElementById('likeButton');
+
+            likeButton.addEventListener('click', function() {
+                network.fit({ animation: { duration: 500 } });
+                movieInfo.classList.remove("active");
+
+                fetch("/more_recommendations/"+likeButton.dataset.id)
+                    .then(response => response.json()) 
+                    .then(data => {
+                        for(var i=1; i<data.length; i++){
+                            newTitle = data[i]["title"] +" ("+data[i]["release_date"].substring(0,4)+")";
+
+                            // check if movie is on blacklist
+
+                            if(blacklist.includes(data[i]["id"])){
+                                continue;
+                            }
+
+                            // check if node already exists
+                            var nodeExists = nodes.get({
+                                filter: function (item) {
+                                    return item.title === newTitle;
+                                }
+                            });
+
+                            if(nodeExists.length>0){
+                                // check if edge already exists
+                                var edgeExists = edges.get({
+                                    filter: function (item) {
+                                        return item.from == likeButton.dataset.nodeId && item.to == nodeExists[0].id ||
+                                        item.from == nodeExists[0].id && item.to == likeButton.dataset.nodeId;
+                                    }
+                                });
+
+                                if(edgeExists.length==0){
+                                    edges.add({
+                                        id: netEdges+1,
+                                        from: likeButton.dataset.nodeId,
+                                        to: nodeExists[0].id,
+                                        value: 1
+                                    })
+                                    netEdges++;
+                                }
+                            }else{
+                                nodes.add({ id: netNodes, 
+                                        title: newTitle,
+                                        json: data[i],
+                                        shape: 'image', 
+                                        image: "https://image.tmdb.org/t/p/original"+ data[i]["poster_path"]
+                                });
+                                netNodes++;
+                                edges.add({
+                                    id: netEdges+1,
+                                    from: likeButton.dataset.nodeId,
+                                    to: netNodes-1,
+                                    value: 1
+                                })
+                                netEdges++;
+                            }
+                        }
+                });
+            });
+
+            dislikeButton = document.getElementById('dislikeButton');
+            dislikeButton.addEventListener('click', function() {
+                blacklist.push(Number.parseInt(dislikeButton.dataset.id));
+                nodes.remove({id: Number.parseInt(dislikeButton.dataset.nodeId)});
+
+                network.fit({ animation: { duration: 500 } });
+                movieInfo.classList.remove("active");
             });
 
             function populate_people(group, data){

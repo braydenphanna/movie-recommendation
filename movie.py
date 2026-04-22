@@ -18,10 +18,23 @@ class Movie:
     def to_dict(self):
         return self.__dict__
     
-    # Creates a Movie object from the corresponding result in recommendations.json
     @classmethod
-    def from_json(cls,result_number):
-        with open("recommendations.json", "r") as file:
-            data = json.load(file)
-        entry = data["results"][result_number]
-        return cls(entry["id"],entry["title"],entry["overview"],entry["poster_path"],entry["genre_ids"],entry["popularity"],entry["release_date"],entry["vote_average"],entry["vote_count"])
+    def from_json(cls, entry):
+        if "genre_ids" in entry:
+            genres = entry["genre_ids"]
+        elif "genres" in entry:
+            genres = [g["id"] for g in entry["genres"]]
+        else:
+            genres = []
+
+        return cls(
+            entry["id"],
+            entry["title"],
+            entry["overview"],
+            entry.get("poster_path"),
+            genres,
+            entry["popularity"],
+            entry["release_date"],
+            entry["vote_average"],
+            entry["vote_count"]
+        )

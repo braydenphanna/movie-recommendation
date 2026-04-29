@@ -34,7 +34,7 @@ python3 ./server.py
 - [X] Add option to input API key on the website
 - [X] Make everyting look more appealing (change colors, fonts, etc.)
 - [X] Offer suggested searches while entering your starting movie
-- [ ] Refine UI for all screen sizes
+- [X] Refine UI for all screen sizes
 
 ## Tech Stack
 ### Frontend
@@ -45,8 +45,3 @@ python3 ./server.py
 ### Backend
 - Python 3
 - [Flask](https://flask.palletsprojects.com/en/stable/) (for Python web integration)
-
-## Other Resources
-- [Flask: file system explained](https://flask.palletsprojects.com/en/stable/tutorial/layout/)
-- [Flask: Python and HTML connectivity explained](https://stackoverflow.com/questions/48552343/how-can-i-execute-a-python-script-from-an-html-button)
-

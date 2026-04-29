@@ -174,9 +174,18 @@
                     console.log("Node Label:", clickedNodeData.title);
                     console.log("Node Data:", clickedNodeData.json);
 
-                    // Zoom in on select
+                    // Calculate zoom by screen size
+                    container = network.body.container;
+                    width = container.clientWidth;
+
+                    baseWidth = 1920;
+                    baseScale = 9;
+
+                    scale = baseScale * (width / baseWidth);
+
+                    // Zoom on select
                     network.focus(nodeId, {
-                        scale: 9,
+                        scale: scale,
                         animation: { duration: 500 }
                     });
 

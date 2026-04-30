@@ -4,7 +4,7 @@ from movie import Movie
 import algorithms
 
 # Enter an api key here
-api_key=""
+api_key="eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ODMyODg2YzBlMWI0ZGNiMTMyMWQzYjk1Y2FjY2VhYSIsIm5iZiI6MTc3NTc2Njg4MS45NTYsInN1YiI6IjY5ZDgwZDYxYjRlN2M1NDg0ZDEyNzAxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.r-rugNtWwNdpxOhS9pkePHAau2tvDx0he1IlqVzYQq0"
 
 headers = {
     "accept": "application/json",
@@ -57,6 +57,7 @@ def get_more_info(query):
 
 cache = {}
 
+# Gets raw details for a movie, used for similarity calculations
 def get_raw_details(id):
     if id in cache:
         return cache[id]
@@ -67,6 +68,7 @@ def get_raw_details(id):
     cache[id] = details
     return details
 
+# Search for movies by name, return list of movie objects
 def search(query):
     url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page=1"
     data = requests.get(url, headers=headers).json()
@@ -79,6 +81,7 @@ def search(query):
 
     return movies
 
+# Set a new API key, used for the form on the index page
 def set_key(key):
     global api_key
     api_key = key
@@ -89,6 +92,7 @@ def set_key(key):
         "Authorization": "Bearer "+ api_key
     }
 
+# Test if an API key is valid by making a simple request to the popular movies endpoint
 def test_key(key):
     url = f"https://api.themoviedb.org/3/movie/popular"
     response = requests.get(url, headers={

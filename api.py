@@ -4,7 +4,7 @@ from movie import Movie
 import algorithms
 
 # Enter an api key here
-api_key="eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ODMyODg2YzBlMWI0ZGNiMTMyMWQzYjk1Y2FjY2VhYSIsIm5iZiI6MTc3NTc2Njg4MS45NTYsInN1YiI6IjY5ZDgwZDYxYjRlN2M1NDg0ZDEyNzAxMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.r-rugNtWwNdpxOhS9pkePHAau2tvDx0he1IlqVzYQq0"
+api_key=""
 
 headers = {
     "accept": "application/json",
